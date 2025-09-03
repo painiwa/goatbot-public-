@@ -3,7 +3,7 @@ const axios = require("axios");
 const path = require("path");
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete = "╭━[ GOATBOT D'OCTAVIO ]━━╮\n╰━━━━━━━━━━━━━━━━╯";
+const doNotDelete = "╭━[ OCTAVIO ]━━╮\n╰━━━━━━━━━━━━━━━━╯";
 
 function applyFont(text) {
   const fontMap = {
@@ -25,7 +25,7 @@ module.exports = {
   config: {
     name: "help",
     version: "1.2",
-    author: "octavio wina ",
+    author: "messie osango ",
     countDown: 5,
     role: 0,
     shortDescription: {
