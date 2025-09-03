@@ -86,7 +86,7 @@ module.exports = {
       const sysPrefix = global.GoatBot.config.prefix;
       const boxPrefix = await utils.getPrefix(event.threadID);
       return message.reply(
-        "╭━[𝙶𝙾𝙰𝚃𝙱𝙾𝚃 𝙿𝚄𝙱𝙻𝙸𝙲]━━╮\n" +
+        "╭━[𝑶𝑪𝑻𝑨𝑩𝑶𝑻]━━╮\n" +
         `┃ 𝙿𝚛𝚎́𝚏𝚒𝚡𝚎 𝚜𝚢𝚜𝚝𝚎̀𝚖𝚎 : ${sysPrefix}\n` +
         "┃\n" +
         `┃ 𝙿𝚛𝚎́𝚏𝚒𝚡𝚎 𝚍𝚎 𝚕𝚊 𝚋𝚘𝚡 : ${boxPrefix}\n` +
