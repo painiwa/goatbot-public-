@@ -3,7 +3,7 @@ const axios = require("axios");
 const path = require("path");
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete = "╭━[ GOATBOT PUBLIC ]━━╮\n╰━━━━━━━━━━━━━━━━╯";
+const doNotDelete = "╭━[ GOATBOT D'OCTAVIO ]━━╮\n╰━━━━━━━━━━━━━━━━╯";
 
 function applyFont(text) {
   const fontMap = {
