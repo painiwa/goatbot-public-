@@ -6,7 +6,7 @@ module.exports = {
     config: {
         name: "welcome",
         version: "1.7",
-        author: "octavio wina",
+        author: "Messie osango",
         category: "events"
     },
 
@@ -30,12 +30,12 @@ module.exports = {
             multiple1: "toi",
             multiple2: "vous",
             defaultWelcomeMessage: `╭━━━━━━━━━━━━━━━━╮
-┃  BIENVENUE  
+┃  BIENVENUE  HUMAINE
 ╰━━━━━━━━━━━━━━━━╯
 
-Bonjour petit mortelle {userName}
+Bonjour mortelle moi c'est kakashi {userName}
 Bienvenue {multiple} dans le groupe: {boxName}
-Passez un excellent {session}
+Passez un mauvais {session}
 
 ╰━━━━━━━━━━━━━━━━━╯`
         }
