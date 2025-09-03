@@ -6,7 +6,7 @@ module.exports = {
     config: {
         name: "welcome",
         version: "1.7",
-        author: "Messie Osango",
+        author: "octavio wina",
         category: "events"
     },
 
@@ -26,14 +26,14 @@ module.exports = {
             session2: "midi",
             session3: "après-midi",
             session4: "soir",
-            welcomeMessage: "╭━━━━━━━━━━━━━━━━━╮\n┃  BIENVENUE  \n╰━━━━━━━━━━━━━━━━╯\n\nMerci de m'avoir invité dans le groupe!\nPréfixe du bot: %1\nPour voir la liste des commandes, entrez: %1help\n\n╰━━━━━━━━━━━━━━━━━╯",
+            welcomeMessage: "╭━━━━━━━━━━━━━━━━━╮\n┃  BIENVENUE HUMAIN(E)  \n╰━━━━━━━━━━━━━━━━╯\n\nMerci de m'avoir invité dans le groupe!\nPréfixe du bot: %1\nPour voir la liste des commandes, entrez: %1help\n\n╰━━━━━━━━━━━━━━━━━╯",
             multiple1: "toi",
             multiple2: "vous",
             defaultWelcomeMessage: `╭━━━━━━━━━━━━━━━━╮
 ┃  BIENVENUE  
 ╰━━━━━━━━━━━━━━━━╯
 
-Bonjour {userName}
+Bonjour petit mortelle {userName}
 Bienvenue {multiple} dans le groupe: {boxName}
 Passez un excellent {session}
 
