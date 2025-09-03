@@ -1,4 +1,4 @@
-name: octavio CI
+name: GOATBOT CI
 
 on:
   push:
