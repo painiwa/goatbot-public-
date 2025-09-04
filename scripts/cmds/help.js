@@ -47,7 +47,7 @@ module.exports = {
 
     if (args.length === 0) {
       const categories = {};
-      let msg = `╭━[ ${applyFont("LIST DE COMMENDE")} ]━━╮\n┃\n┃  ${applyFont("OCTABOT")}\n┃\n╰━━━━━━━━━━━━━━━━╯\n`;
+      let msg = `╭━[ ${applyFont("OCTAVIO DEV-BOT cmd")} ]━━╮\n┃\n┃  ${applyFont("OCTABOT")}\n┃\n╰━━━━━━━━━━━━━━━━╯\n`;
 
       for (const [name, value] of commands) {
         if (value.config.role > role) continue;
