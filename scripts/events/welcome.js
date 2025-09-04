@@ -33,7 +33,7 @@ module.exports = {
 ┃  BIENVENUE  HUMAINE
 ╰━━━━━━━━━━━━━━━━╯
 
-Bonjour mortelle moi c'est kakashi {userName}
+Bonjour humain moi c'est kakashi un bot créé par octavio ton nom c'est {userName}
 Bienvenue {multiple} dans le groupe: {boxName}
 Passez un mauvais {session}
 
