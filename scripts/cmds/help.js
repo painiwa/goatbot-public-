@@ -3,7 +3,7 @@ const axios = require("axios");
 const path = require("path");
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete = "╭━[ OCTAVIO ]━━╮\n╰━━━━━━━━━━━━━━━━╯";
+const doNotDelete = "╭━[ OCTAVIO DEV-BOT ]━━╮\n╰━━━━━━━━━━━━━━━━╯";
 
 function applyFont(text) {
   const fontMap = {
@@ -47,7 +47,7 @@ module.exports = {
 
     if (args.length === 0) {
       const categories = {};
-      let msg = `╭━[ ${applyFont("COMMAND LIST")} ]━━╮\n┃\n┃  ${applyFont("OCTABOT")}\n┃\n╰━━━━━━━━━━━━━━━━╯\n`;
+      let msg = `╭━[ ${applyFont("LIST DE COMMENDE")} ]━━╮\n┃\n┃  ${applyFont("OCTABOT")}\n┃\n╰━━━━━━━━━━━━━━━━╯\n`;
 
       for (const [name, value] of commands) {
         if (value.config.role > role) continue;
@@ -94,7 +94,7 @@ module.exports = {
         const guideBody = configCommand.guide?.en || "No guide available.";
         const usage = guideBody.replace(/{p}/g, prefix).replace(/{n}/g, configCommand.name);
 
-        const response = `╭━[ ${applyFont("COMMAND INFO")} ]━━╮
+        const response = `╭━[ ${applyFont("BOT INFO")} ]━━╮
 ┃
 ┃ ${applyFont("NAME")}: ${configCommand.name}
 ┃ ${applyFont("VERSION")}: ${configCommand.version || "1.0"}
