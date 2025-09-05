@@ -36,16 +36,16 @@ module.exports = {
         }
       }
       if (groupList.length === 0) {
-        return api.sendMessage("╭━[ GOATBOT PUBLIC ]━━╮\n┃\n┃ ◦ Aucun groupe trouvé\n┃\n╰━━━━━━━━━━━━━━━━╯", event.threadID, event.messageID);
+        return api.sendMessage("╭━[ OCTOVIOBOT DEV ]━━╮\n┃\n┃ ◦ Aucun groupe trouvé\n┃\n╰━━━━━━━━━━━━━━━━╯", event.threadID, event.messageID);
       }
       const message =
-        `╭━[ GOATBOT PUBLIC ]━━╮\n` +
+        `╭━[ OCTAVIOBOT DEV ]━━╮\n` +
         `┃\n` +
         groupList.join("\n┃\n") +
         `\n╰━━━━━━━━━━━━━━━━╯`;
       return api.sendMessage(message, event.threadID, event.messageID);
     } catch {
-      return api.sendMessage("╭━[ GOATBOT PUBLIC ]━━╮\n┃\n┃ ◦ Erreur de récupération\n┃\n╰━━━━━━━━━━━━━━━━╯", event.threadID, event.messageID);
+      return api.sendMessage("╭━[ OCTAVIOBOT DEV]━━╮\n┃\n┃ ◦ Erreur de récupération\n┃\n╰━━━━━━━━━━━━━━━━╯", event.threadID, event.messageID);
     }
   }
 };
