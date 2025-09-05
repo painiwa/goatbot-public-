@@ -6,7 +6,7 @@ module.exports = {
   config: {
     name: 'resend',
     version: '1.0',
-    author: 'david',
+    author: 'octavio',
     countDown: 5,
     role: 0,
     shortDescription: 'Goat Bot Command',
