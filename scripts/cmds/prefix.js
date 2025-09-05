@@ -4,7 +4,7 @@ const { utils } = global;
 module.exports = {
   config: {
     name: "prefix",
-    aliases: ["🌚"],
+    aliases: ["😊"],
     version: "1.3",
     author: "messie osango",
     countDown: 5,
@@ -82,7 +82,7 @@ module.exports = {
   },
 
   onChat: async function ({ event, message }) {
-    if (event.body && (event.body.toLowerCase() === "prefix" || event.body.toLowerCase() === "🌚")) {
+    if (event.body && (event.body.toLowerCase() === "prefix" || event.body.toLowerCase() === "😊")) {
       const sysPrefix = global.GoatBot.config.prefix;
       const boxPrefix = await utils.getPrefix(event.threadID);
       return message.reply(
@@ -91,7 +91,7 @@ module.exports = {
         "┃\n" +
         `┃ 𝙿𝚛𝚎́𝚏𝚒𝚡𝚎 𝚍𝚎 𝚕𝚊 𝚋𝚘𝚡 : ${boxPrefix}\n` +
         "┃\n" +
-        `┃ 𝚄𝚝𝚒𝚕𝚒𝚜𝚎𝚣 ${boxPrefix}help 𝚙𝚘𝚞𝚛 𝚟𝚘𝚒𝚛 𝚝𝚘𝚞𝚝𝚎𝚜 𝚕𝚎𝚜 𝚌𝚘𝚖𝚖𝚊𝚗𝚍𝚎𝚜\n` +
+        `┃ ℎ𝑢𝑚𝑎𝑖𝑛 é𝑐𝑟𝑖𝑡 ${boxPrefix}help 𝚙𝚘𝚞𝚛 𝚟𝚘𝚒𝚛 𝚝𝚘𝚞𝚝𝚎𝚜 𝚕𝚎𝚜 𝚌𝚘𝚖𝚖𝚊𝚗𝚍𝚎𝚜 𝑚𝑎𝑖𝑠.𝑛𝑒 𝑣𝑜𝑙𝑒 𝑝𝑎𝑠 𝑟𝑒𝑔𝑎𝑟𝑑𝑒 𝑠𝑒𝑢𝑙𝑚𝑒𝑚𝑡\n` +
         "╰━━━━━━━━━━━━━━━━╯"
       );
     }
