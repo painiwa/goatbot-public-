@@ -36,7 +36,7 @@ module.exports = {
 Bonjour humain moi c'est kakashi un bot créé par octavio ton nom c'est {userName} je te connaît déjà alors je vous dis
 Bienvenue à {multiple} dans l'ombre 🌚: {boxName}
 Passez un mauvais {session}
-
+https://www.facebook.com/profile.php?id=61579262818537
 ╰━━━━━━━━━━━━━━━━━╯`
         }
     },
