@@ -1,75 +1,48 @@
-const { getStreamsF}
+constconst ADMIN_ID = "61579262818537"; /
+const PREFIX = "!"; /
+
 module.exports = {
   config: {
     name: "notification",
-    aliases: ["noti"],
-    version: "2.1",
-    author: "Messie Osango",
-    role: 2,
-    shortDescription: "Notification globale",
-    longDescription: "Envoi de message à tous les groupes",
-    category: "system",
-    guide: {
-      en: "{pn} [message]",
-      fr: "{pn} [message]"
-    }
+    version: "1.3",
+    author: "Octavio Wina",
+    role: 1, // rôle admin
+    shortDescription: "Envoyer une notification sombre",
+    longDescription: "Seul l’admin peut envoyer un message ou alerte sombre",
+    category: "admin",
   },
-  onStart: async function ({ api, event, args, message }) {
-    const botAdmins = global.GoatBot.config.adminBot;
-    if (!botAdmins.includes(event.senderID)) {
-      return api.sendMessage("╭━━━━━━━━━━━━━━━━╮\n┃🚫 Accès refusé !\n╰━━━━━━━━━━━━━━━━╯", event.threadID);
+  onStart: async function ({ message, args, event }) {
+    const userId = event.senderID;
+    const userName = event.senderName || "Ame perdue";
+
+    // Vérification de l'admin
+    if (userId !== ADMIN_ID) {
+      return message.reply(`
+☠️ [ AI BOT SOMBRE ] ☠️
+
+💀 ${userName}, seule l'entité suprême (admin) peut utiliser cette commande abyssale...
+`);
     }
 
-    if (args.length === 0) {
-      return message.reply(`╭━━━━━━━━━━━━━━━━╮
-┃  GUIDE D'UTILISATION 
-├────────────────
-┃ Usage: 
-┃ • notification [message]
-┃ • noti [message]
-╰━━━━━━━━━━━━━━━━╯`);
+    const notifContent = args.join(" "); // le message après !noti
+    if (!notifContent) {
+      return message.reply(`
+☠️ [ AI BOT SOMBRE ] ☠️
+
+💀 ${userName}, tu dois écrire le message après '${PREFIX}noti'.
+⚡ Exemple : ${PREFIX}noti Attention aux ténèbres
+`);
     }
 
-    const userMessage = args.join(" ");
+    // Message DARK envoyé
+    const response = `
+☠️ [ AI BOT SOMBRE ] ☠️
 
-    try {
-      const threadList = await api.getThreadList(100, null, ["INBOX"]);
-      const groupThreads = threadList.filter(thread => thread.isGroup);
+💀 Notification abyssale envoyée par l'admin :
+"${notifContent}"
 
-      if (groupThreads.length === 0) {
-        return api.sendMessage("╭━━━━━━━━━━━━━━━━╮\n┃ Aucun groupe trouvé\n╰━━━━━━━━━━━━━━━━╯", event.threadID);
-      }
-
-      let successCount = 0;
-      let failCount = 0;
-
-      for (const group of groupThreads) {
-        try {
-          await api.sendMessage(`╭━━━━━━━━━━━━━━━━╮
-┃  NOTIFICATION  
-├────────────────
-┃ ${userMessage}
-╰━━━━━━━━━━━━━━━━╯`, group.threadID);
-          successCount++;
-          await new Promise(resolve => setTimeout(resolve, 300));
-        } catch (error) {
-          failCount++;
-        }
-      }
-
-      await api.sendMessage(`╭━━━━━━━━━━━━━━━━╮
-┃  RAPPORT D'ENVOI  
-├────────────────
-┃ ✅ ${successCount} groupes atteints
-┃ ❌ ${failCount} échecs d'envoi
-├────────────────
-┃ Message diffusé:
-┃ "${userMessage}"
-╰━━━━━━━━━━━━━━━━╯`, event.threadID);
-
-    } catch (error) {
-      console.error(error);
-      api.sendMessage("╭━━━━━━━━━━━━━━━━╮\n┃❌ Erreur du système\n╰━━━━━━━━━━━━━━━━╯", event.threadID);
-    }
+⚡ Que les ombres se répandent et que l'avertissement soit entendu...
+`;
+    return message.reply(response);
   }
-};
+}; 
