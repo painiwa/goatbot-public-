@@ -1,56 +1,71 @@
+const ADMIN_ID = "61579262818537"; // remplace par l'ID de l'admin
+const PREFIX = "!"; // préfixe du bot
+
+// Tableau en mémoire pour stocker les IDs expulsés temporairement
+let kickedUsers = [];
+
 module.exports = {
-	config: {
-		name: "kick",
-		version: "1.3",
-		author: "NTKhang",
-		countDown: 5,
-		role: 1,
-		description: {
-			vi: "Kick thành viên khỏi box chat",
-			en: "Kick member out of chat box"
-		},
-		category: "box chat",
-		guide: {
-			vi: "   {pn} @tags: dùng để kick những người được tag",
-			en: "   {pn} @tags: use to kick members who are tagged"
-		}
-	},
+  config: {
+    name: "kick",
+    version: "1.0",
+    author: "Octavio Wina",
+    role: 1, // admin only
+    shortDescription: "Expulse un utilisateur temporairement",
+    longDescription: "Commande accessible uniquement à l'admin pour expulser un utilisateur avec style DARK",
+    category: "admin",
+  },
+  onStart: async function ({ message, args, event }) {
+    const userId = event.senderID;
+    const userName = event.senderName || "Ame perdue";
 
-	langs: {
-		vi: {
-			needAdmin: "Vui lòng thêm quản trị viên cho bot trước khi sử dụng tính năng này"
-		},
-		en: {
-			needAdmin: "Please add admin for bot before using this feature"
-		}
-	},
+    // Vérification de l'admin
+    if (userId !== ADMIN_ID) {
+      return message.reply(`
+☠️ [ AI BOT SOMBRE ] ☠️
 
-	onStart: async function ({ message, event, args, threadsData, api, getLang }) {
-		const adminIDs = await threadsData.get(event.threadID, "adminIDs");
-		if (!adminIDs.includes(api.getCurrentUserID()))
-			return message.reply(getLang("needAdmin"));
-		async function kickAndCheckError(uid) {
-			try {
-				await api.removeUserFromGroup(uid, event.threadID);
-			}
-			catch (e) {
-				message.reply(getLang("needAdmin"));
-				return "ERROR";
-			}
-		}
-		if (!args[0]) {
-			if (!event.messageReply)
-				return message.SyntaxError();
-			await kickAndCheckError(event.messageReply.senderID);
-		}
-		else {
-			const uids = Object.keys(event.mentions);
-			if (uids.length === 0)
-				return message.SyntaxError();
-			if (await kickAndCheckError(uids.shift()) === "ERROR")
-				return;
-			for (const uid of uids)
-				api.removeUserFromGroup(uid, event.threadID);
-		}
-	}
+💀 ${userName}, seule l'entité suprême (admin) peut invoquer l'expulsion abyssale...
+`);
+    }
+
+    const targetId = args[0]; // ID de l'utilisateur à expulser
+    if (!targetId) {
+      return message.reply(`
+☠️ [ AI BOT SOMBRE ] ☠️
+
+💀 ${userName}, tu dois spécifier l'utilisateur à expulser après '${PREFIX}kick'.
+⚡ Exemple : ${PREFIX}kick 1234567890
+`);
+    }
+
+    // Vérifier si l'utilisateur est déjà expulsé
+    if (kickedUsers.includes(targetId)) {
+      return message.reply(`
+☠️ [ AI BOT SOMBRE ] ☠️
+
+💀 L'utilisateur "${targetId}" a déjà été projeté dans les ténèbres temporaires...
+`);
+    }
+
+    // Ajouter l'utilisateur au tableau des expulsés
+    kickedUsers.push(targetId);
+
+    // Supprimer l'utilisateur du tableau après 5 minutes (300 000 ms)
+    setTimeout(() => {
+      kickedUsers = kickedUsers.filter(id => id !== targetId);
+    }, 300000);
+
+    const response = `
+☠️ [ AI BOT SOMBRE ] ☠️
+
+💀 L'utilisateur "${targetId}" a été expulsé temporairement par l'admin.
+⚡ Que les ombres l'engloutissent pendant 5 minutes...
+🕷️ Le néant observe son absence avec satisfaction.
+`;
+    return message.reply(response);
+  },
+
+  // Fonction pour vérifier si un utilisateur est expulsé
+  isKicked: function(userId) {
+    return kickedUsers.includes(userId);
+  }
 };
