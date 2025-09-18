@@ -1,63 +1,39 @@
-const { findUid } = global.utils;
-const regExCheckURL = /^(http|https):\/\/[^ "]+$/;
+constmodule.exports = {
+  config: {
+    name: "uid",
+    version: "1.0",
+    author: "Octavio Wina",
+    role: 0, // accessible à tous
+    shortDescription: "Révèle l’UID sombre",
+    longDescription: "Invoque les ténèbres pour dévoiler l’UID caché d’une âme mentionnée ou du demandeur lui-même.",
+    category: "system"
+  },
 
-module.exports = {
-	config: {
-		name: "uid",
-		version: "1.3",
-		author: "NTKhang",
-		countDown: 5,
-		role: 0,
-		description: {
-			vi: "Xem user id facebook của người dùng",
-			en: "View facebook user id of user"
-		},
-		category: "info",
-		guide: {
-			vi: "   {pn}: dùng để xem id facebook của bạn"
-				+ "\n   {pn} @tag: xem id facebook của những người được tag"
-				+ "\n   {pn} <link profile>: xem id facebook của link profile"
-				+ "\n   Phản hồi tin nhắn của người khác kèm lệnh để xem id facebook của họ",
-			en: "   {pn}: use to view your facebook user id"
-				+ "\n   {pn} @tag: view facebook user id of tagged people"
-				+ "\n   {pn} <profile link>: view facebook user id of profile link"
-				+ "\n   Reply to someone's message with the command to view their facebook user id"
-		}
-	},
+  onStart: async function ({ message, event }) {
+    const BOT_NAME = "☠️ [ AI BOT SOMBRE ] ☠️";
 
-	langs: {
-		vi: {
-			syntaxError: "Vui lòng tag người muốn xem uid hoặc để trống để xem uid của bản thân"
-		},
-		en: {
-			syntaxError: "Please tag the person you want to view uid or leave it blank to view your own uid"
-		}
-	},
+    let targetUID;
+    let targetName;
 
-	onStart: async function ({ message, event, args, getLang }) {
-		if (event.messageReply)
-			return message.reply(event.messageReply.senderID);
-		if (!args[0])
-			return message.reply(event.senderID);
-		if (args[0].match(regExCheckURL)) {
-			let msg = '';
-			for (const link of args) {
-				try {
-					const uid = await findUid(link);
-					msg += `${link} => ${uid}\n`;
-				}
-				catch (e) {
-					msg += `${link} (ERROR) => ${e.message}\n`;
-				}
-			}
-			message.reply(msg);
-			return;
-		}
+    if (Object.keys(event.mentions).length > 0) {
+      targetUID = Object.keys(event.mentions)[0];
+      targetName = event.mentions[targetUID];
+    } else {
+      targetUID = event.senderID;
+      targetName = "toi, voyageur des ombres";
+    }
 
-		let msg = "";
-		const { mentions } = event;
-		for (const id in mentions)
-			msg += `${mentions[id].replace("@", "")}: ${id}\n`;
-		message.reply(msg || getLang("syntaxError"));
-	}
+    const response = `
+═══════════════════════
+☠️ ${BOT_NAME} ☠️
+═══════════════════════
+
+💀 Les abysses ont parlé...
+🕷️ UID de ${targetName} : ${targetUID}
+
+⚡ N'oublie pas... chaque UID est une marque éternelle gravée dans les ténèbres.
+`;
+
+    return message.reply(response);
+  }
 };
