@@ -1,99 +1,31 @@
-const fs = require("fs-extra");
-const { utils } = global;
+constconst { prefix } = require("./prefix"); // importe le préfixe défini
 
 module.exports = {
   config: {
-    name: "prefix",
-    aliases: ["😊"],
-    version: "1.3",
-    author: "messie osango",
-    countDown: 5,
+    name: "prefixinfo",
+    version: "1.1",
+    author: "Octavio Wina",
     role: 0,
-    shortDescription: "Changer le préfixe du bot",
-    longDescription: "Change le symbole de commande du bot dans votre boîte de discussion ou dans tout le système du bot (admin uniquement)",
-    category: "box chat",
-    guide: {
-      fr:
-        "   {pn} <nouveau préfixe>: changer le préfixe dans votre boîte de discussion" +
-        "\n   Exemple:" +
-        "\n    {pn} #" +
-        "\n\n   {pn} <nouveau préfixe> -g: changer le préfixe dans le système du bot (admin bot uniquement)" +
-        "\n   Exemple:" +
-        "\n    {pn} # -g" +
-        "\n\n   {pn} reset: réinitialiser le préfixe dans votre boîte de discussion"
-    }
+    shortDescription: "Affiche le préfixe du bot",
+    longDescription: "Explique quel préfixe le bot utilise et comment accéder aux commandes",
+    category: "system",
   },
+  onStart: async function ({ message, event }) {
+    const userName = event.senderName || "Ami des abysses";
+    const text = `
+⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓
+[ AI BOT SOMBRE ]
+⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓
 
-  langs: {
-    fr: {
-      reset: "✨ Votre préfixe a été réinitialisé par défaut: %1",
-      onlyAdmin: "⚠️ Seuls les administrateurs peuvent changer le préfixe du système",
-      confirmGlobal: "🔔 Veuillez réagir à ce message pour confirmer le changement de préfixe du système",
-      confirmThisThread: "💬 Veuillez réagir à ce message pour confirmer le changement de préfixe dans votre discussion",
-      successGlobal: "✅ Préfixe du système changé avec succès: %1",
-      successThisThread: "✅ Préfixe changé avec succès dans votre discussion: %1"
-    }
-  },
+👋 Salut ${userName} !
 
-  onStart: async function ({ message, role, args, event, threadsData, getLang }) {
-    if (!args[0]) return message.SyntaxError();
-    const newPrefix = args[0];
-    const isGlobal = args.includes("-g");
+💀 Je suis ton bot sombre et abyssal.
+⚡ Mon préfixe actuel est : '${prefix}'
 
-    if (args[0] === "reset") {
-      await threadsData.set(event.threadID, null, "data.prefix");
-      return message.reply(getLang("reset", global.GoatBot.config.prefix));
-    }
+👁️ Pour voir toutes mes commandes, tape '${prefix}help'.
 
-    if (isGlobal) {
-      if (role < 2) return message.reply(getLang("onlyAdmin"));
-      return message.reply({
-        body: getLang("confirmGlobal"),
-        reaction: {
-          author: event.userID,
-          newPrefix,
-          setGlobal: true
-        }
-      });
-    } else {
-      return message.reply({
-        body: getLang("confirmThisThread"),
-        reaction: {
-          author: event.userID,
-          newPrefix,
-          setGlobal: false
-        }
-      });
-    }
-  },
-
-  onReaction: async function ({ message, threadsData, event, Reaction, getLang }) {
-    const { author, newPrefix, setGlobal } = Reaction;
-    if (event.userID !== author) return;
-
-    if (setGlobal) {
-      global.GoatBot.config.prefix = newPrefix;
-      fs.writeFileSync(global.client.dirConfig, JSON.stringify(global.GoatBot.config, null, 2));
-      return message.reply(getLang("successGlobal", newPrefix));
-    } else {
-      await threadsData.set(event.threadID, newPrefix, "data.prefix");
-      return message.reply(getLang("successThisThread", newPrefix));
-    }
-  },
-
-  onChat: async function ({ event, message }) {
-    if (event.body && (event.body.toLowerCase() === "prefix" || event.body.toLowerCase() === "😊")) {
-      const sysPrefix = global.GoatBot.config.prefix;
-      const boxPrefix = await utils.getPrefix(event.threadID);
-      return message.reply(
-        "╭━[𝑶𝑪𝑻𝑨𝑩𝑶𝑻]━━╮\n" +
-        `┃ 𝙿𝚛𝚎́𝚏𝚒𝚡𝚎 𝚜𝚢𝚜𝚝𝚎̀𝚖𝚎 : ${sysPrefix}\n` +
-        "┃\n" +
-        `┃ 𝙿𝚛𝚎́𝚏𝚒𝚡𝚎 𝚍𝚎 𝚕𝚊 𝚋𝚘𝚡 : ${boxPrefix}\n` +
-        "┃\n" +
-        `┃ ℎ𝑢𝑚𝑎𝑖𝑛 é𝑐𝑟𝑖𝑡 ${boxPrefix}help 𝚙𝚘𝚞𝚛 𝚟𝚘𝚒𝚛 𝚝𝚘𝚞𝚝𝚎𝚜 𝚕𝚎𝚜 𝚌𝚘𝚖𝚖𝚊𝚗𝚍𝚎𝚜 𝑚𝑎𝑖𝑠.𝑛𝑒 𝑣𝑜𝑙𝑒 𝑝𝑎𝑠 𝑟𝑒𝑔𝑎𝑟𝑑𝑒 𝑠𝑒𝑢𝑙𝑚𝑒𝑚𝑡\n` +
-        "╰━━━━━━━━━━━━━━━━╯"
-      );
-    }
+⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓⛓
+`;
+    return message.reply(text);
   }
-};
+}; 
